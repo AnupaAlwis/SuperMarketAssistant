@@ -1,13 +1,11 @@
-langchain
-langchain-community
+langchain==0.1.20
+langchain-community==0.0.38
+
 langchain-experimental
 
 chromadb
-
 sentence-transformers
 
 pymysql
 sqlalchemy
 pandas
-
-tiktoken

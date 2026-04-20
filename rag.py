@@ -1,23 +1,31 @@
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Force CPU mode
+
 import pandas as pd
-from langchain.document_loaders import DataFrameLoader
+from langchain.schema import Document
+from langchain_community.document_loaders import DataFrameLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from config import CHROMA_DIR
 
+def _get_embeddings():
+    return HuggingFaceEmbeddings(
+        model_name="all-MiniLM-L6-v2",
+        model_kwargs={"device": "cpu"}
+    )
+
 def build_vectorstore(db):
-    query = "SELECT name, description FROM items"
-    df = pd.read_sql(query, db.engine)
+    query = "SELECT name, description FROM Products"
+    df = pd.read_sql(query, db._engine)
 
     docs = []
     for _, row in df.iterrows():
-        docs.append({
-            "page_content": row["description"],
-            "metadata": {"name": row["name"]}
-        })
+        docs.append(Document(
+            page_content=row["description"],
+            metadata={"name": row["name"]}
+        ))
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2"
-    )
+    embeddings = _get_embeddings()
 
     vectorstore = Chroma.from_documents(
         documents=docs,
@@ -25,13 +33,10 @@ def build_vectorstore(db):
         persist_directory=CHROMA_DIR
     )
 
-    vectorstore.persist()
     return vectorstore
 
 def load_vectorstore():
-    embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2"
-    )
+    embeddings = _get_embeddings()
 
     return Chroma(
         persist_directory=CHROMA_DIR,

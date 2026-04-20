@@ -9,7 +9,7 @@ def setup():
     get_retriever(db, rebuild=True)
 
 def main():
-    setup()  # comment this after first run
+    # setup()  # uncomment this to rebuild the vector DB
 
     agent = create_agent()
 
@@ -17,14 +17,20 @@ def main():
     print("Type 'exit' to quit\n")
 
     while True:
-        query = input("User: ")
+        try:
+            query = input("User: ")
+        except (EOFError, KeyboardInterrupt):
+            print("\nGoodbye!")
+            break
 
         if query.lower() == "exit":
             break
 
-        response = agent.run(query)
-
-        print(f"Bot: {response}\n")
+        try:
+            response = agent.run(query)
+            print(f"Bot: {response}\n")
+        except Exception as e:
+            print(f"Bot: Sorry, I encountered an error: {e}\n")
 
 if __name__ == "__main__":
     main()

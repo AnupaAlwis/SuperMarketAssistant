@@ -1,4 +1,4 @@
-from langchain.utilities import SQLDatabase
+from langchain_community.utilities import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain_ollama import ChatOllama
 from config import DB_URI
@@ -10,7 +10,7 @@ def get_sql_chain():
     db = get_database()
 
     llm = ChatOllama(
-        model="llama3",
+        model="llama3.2:1b",
         temperature=0
     )
 

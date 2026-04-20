@@ -1,12 +1,12 @@
-from langchain.agents import initialize_agent
+from langchain.agents import initialize_agent, AgentType
 from langchain.memory import ConversationBufferMemory
 from langchain_ollama import ChatOllama
 from tools import get_sql_tool, get_rag_tool
 
 def create_agent():
     llm = ChatOllama(
-        model="llama3",
-        temperature=0.3
+        model="llama3.2:1b",
+        temperature=0
     )
 
     sql_tool = get_sql_tool()
@@ -17,23 +17,14 @@ def create_agent():
         return_messages=True
     )
 
-    system_prompt = """
-You are an intelligent supermarket assistant.
-
-Rules:
-- Use Database Tool for prices, stock, supplier
-- Use Product Knowledge Base for recommendations
-- Use both tools if needed
-- Always give clear answers
-"""
-
     agent = initialize_agent(
         tools=[sql_tool, rag_tool],
         llm=llm,
-        agent="zero-shot-react-description",
+        agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
         memory=memory,
         verbose=True,
-        agent_kwargs={"system_message": system_prompt}
+        handle_parsing_errors=True,
+        max_iterations=5,
     )
 
     return agent
