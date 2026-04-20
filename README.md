@@ -195,37 +195,5 @@ Try asking:
 * ✅ Persistent vector database (Chroma)
 * ✅ Conversational memory
 
----
 
-## ⚠️ Limitations
 
-* Local LLMs may be slower than cloud models
-* SQL generation may require prompt tuning
-* Requires proper database schema design
-
----
-
-## 🚀 Future Improvements
-
-* Web frontend integration (React)
-* Add shopping cart functionality
-* Improve recommendation accuracy
-* Deploy as an API (FastAPI)
-* Add multilingual support
-
----
-
-## 📄 License
-
-This project is for educational and development purposes.
-
----
-
-## 🙌 Acknowledgements
-
-* LangChain
-* Ollama
-* Sentence Transformers
-* Chroma
-
----
