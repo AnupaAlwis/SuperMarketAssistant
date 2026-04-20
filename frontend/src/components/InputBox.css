@@ -1,0 +1,60 @@
+.input-box {
+  display: flex;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  gap: 1rem;
+  align-items: center;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+  background: #f8fafc;
+}
+
+.input-box input:focus {
+  border-color: #6c5ce7;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+.input-box button {
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.input-box button:hover:not(:disabled) {
+  background: #5b4cc4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+.input-box button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.input-box button:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.input-box button svg {
+  width: 20px;
+  height: 20px;
+}
