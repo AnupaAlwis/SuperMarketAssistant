@@ -1,0 +1,14 @@
+langchain
+langchain-community
+langchain-ollama
+langchain-experimental
+
+chromadb
+
+sentence-transformers
+
+pymysql
+sqlalchemy
+pandas
+
+tiktoken
