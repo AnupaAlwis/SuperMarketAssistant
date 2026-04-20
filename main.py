@@ -5,7 +5,6 @@ from rag import get_retriever
 def setup():
     # Build vector DB on first run
     db = get_database()
-    print("Building vector database (first time only)...")
     get_retriever(db, rebuild=True)
 
 def main():
